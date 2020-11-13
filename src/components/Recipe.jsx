@@ -46,16 +46,16 @@ const Recipe = ({recipe}) => {
 
   const showIngredients = info => {
     let ingredients = [];
-    for(let i = 1; i <= 16; i++){
+    for(let i = 1; i < 16; i++){
       if(info[`strIngredient${i}`]){
-        ingredients.push(<li key={Date.now()}> {info[`strIngredient${i}`]} {info[`strMeasure${i}`]} </li>)
+        ingredients.push(<li key={i}> {info[`strIngredient${i}`]} {info[`strMeasure${i}`]} </li>)
       }
     }
     return ingredients;
   }
 
   return ( 
-    <div className="col-md-6 col-sm-12 col-lg-4 mb-3 w-sm-100">
+    <div className="col-md-6 col-sm-12 col-lg-4 mb-3">
       <div className="card" style={cardStyle}>
         <h5 className="card-header text-center">{recipe.strDrink}</h5>
         <img src={recipe.strDrinkThumb} alt={`Drink ${recipe.strDrink}`} className="card-img-top" style={imgStyle}/>
@@ -65,10 +65,13 @@ const Recipe = ({recipe}) => {
             onClick={() => {
               setIdRecipe(recipe.idDrink);
               hanldeOpen();
+              // setTimeout(() =>setIdRecipe(null), 3800)
+              
             }}  
           >
             Open Drink
           </button>
+
           <Modal open={open} onClose={() => {
             handleClose();
             setIdRecipe(null);
